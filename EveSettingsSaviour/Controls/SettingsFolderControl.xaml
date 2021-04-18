@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="EveSettingsSaviour.Controls.SettingsFolderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EveSettingsSaviour.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="390">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32px" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="32px" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32px"/>
+            <RowDefinition Height="32px"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Label Name="lbl_FolderName" Grid.Column="1" VerticalAlignment="Center"></Label>
+        <TextBlock Name="txtBlock_FolderPath" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" />
+        <StackPanel Name="sp_userFiles" Grid.Column="1" Grid.Row="2"/>
+        <StackPanel Name="sp_characterFiles" Grid.Column="1" Grid.Row="3"/>
+        
+    </Grid>
+</UserControl>

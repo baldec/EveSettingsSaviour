@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="EveSettingsSaviour.Controls.UserSettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EveSettingsSaviour.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="390">
+    <Grid>
+        <Label>User settings not implemented yet!</Label>
+    </Grid>
+</UserControl>
