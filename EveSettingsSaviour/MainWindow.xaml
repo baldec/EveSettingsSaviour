@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EveSettingsSaviour"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -13,11 +13,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
+            <RowDefinition Height="100px" />
         </Grid.RowDefinitions>
         <Grid x:Name="Source">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="32px" />
@@ -36,26 +37,67 @@
             <ComboBox Name="source_characterFile" Grid.Column="1" Grid.Row="2" ></ComboBox>
 
             <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Configuration</Label>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32px" />
+                        <RowDefinition Height="32px" />
+                        <RowDefinition Height="32px" />
+                        <RowDefinition Height="32px" />
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <CheckBox Name="cb_configuration_allianceOnly" Grid.Row="0" Margin="5px" VerticalAlignment="Center" Content="Only show characters in same alliance"></CheckBox>
+                    <CheckBox Name="cb_configuration_corporationOnly" Grid.Row="1" Margin="5px" VerticalAlignment="Center" Content="Only show characters in same corporation"></CheckBox>
+                    <CheckBox Name="cb_copy_userAccounts" Grid.Row="2" Margin="5px" VerticalAlignment="Center" Content="Copy user account(s) settings" IsChecked="True"></CheckBox>
+                    <CheckBox Name="cb_copy_characters" Grid.Row="3" Margin="5px" VerticalAlignment="Center" Content="Copy character(s) settings" IsChecked="True"></CheckBox>
+                    
+                </Grid>
                 <!--Settings-->
                 <!--Limit to alliancre-->
                 <!--Limit to corp-->
             </Grid>
         </Grid>
-        <Grid Grid.Column="1" Name="Target">
+        <Grid Grid.Column="1" Name="Target" >
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="32px" />
                 <RowDefinition Height="*" />
-                <RowDefinition MaxHeight="32px" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="2" Content="Target(s)"/>
-
-            <StackPanel Name="sp_targets" Grid.Row="1"/>
-
-            <Grid Grid.Row="2">
+            <Label Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="2" Content="Target(s)" FontSize="18" FontWeight="Bold"/>
+            <ScrollViewer Grid.Row="1" HorizontalContentAlignment="Center" PanningMode="VerticalOnly" SnapsToDevicePixels="True" VerticalScrollBarVisibility="Auto"  CanContentScroll="True" >
+                <StackPanel Name="sp_targets" Grid.Row="1"/>
+            </ScrollViewer>
+            <Grid Grid.Row="0">
                 <!--Checkboxes and profiles-->
                 <Button Name="btn_CopySettings" Grid.Column="0" Grid.Row="1" Content="Copy Settings" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="32" Width="100" Click="btn_CopySettings_Click"/>
             </Grid>
             
+        </Grid>
+        <Grid Grid.Row="1" Margin="2, 2, 2, 2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32px"/>
+                <RowDefinition Height="32px"/>
+                <RowDefinition Height="32px"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Name="btn_chooseFrom" Content="From" Click="btn_chooseFrom_Click"/>
+            <TextBox Name="txt_fromPath" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" MaxLines="1" Margin="4px" IsEnabled="False" TextChanged="txt_pathValidation"></TextBox>
+            <Button Grid.Row="1" Grid.Column="0" Name="btn_chooseTo" Content="To" Click="btn_chooseTo_Click"/>
+            <TextBox Name="txt_toPath" Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="1" MaxLines="1" Margin="4px" IsEnabled="False" TextChanged="txt_pathValidation"></TextBox>
+
+            <Button Grid.Row="2" Grid.Column="0" Name="btn_loadBackup" Grid.ColumnSpan="2" Content="Load From" IsEnabled="False" Click="btn_loadBackup_Click"/>
+            <Button Grid.Row="2" Grid.Column="2" Name="btn_backupSelected" Grid.ColumnSpan="2" Content="Create Backup of folder" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Window>

@@ -32,6 +32,8 @@ namespace EveSettingsSaviour.Controls
             InitializeUserFiles();
 
             InitializeCharacterFiles();
+            lbl_FolderName.Content = settingsFolder.FolderName;
+            txtBlock_FolderPath.Text = settingsFolder.FilePath;
         }
 
         private void InitializeCharacterFiles()

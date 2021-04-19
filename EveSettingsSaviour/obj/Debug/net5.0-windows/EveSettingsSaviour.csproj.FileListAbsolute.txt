@@ -20,3 +20,9 @@ C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5
 C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\ref\EveSettingsSaviour.dll
 C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\EveSettingsSaviour.pdb
 C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\EveSettingsSaviour.genruntimeconfig.cache
+C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\Controls\CharacterSettingsControl.g.cs
+C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\Controls\SettingsFolderControl.g.cs
+C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\Controls\UserSettingsControl.g.cs
+C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\Controls\CharacterSettingsControl.baml
+C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\Controls\SettingsFolderControl.baml
+C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\obj\Debug\net5.0-windows\Controls\UserSettingsControl.baml

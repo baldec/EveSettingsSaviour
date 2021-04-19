@@ -16,9 +16,8 @@ namespace EveSettingsSaviour.Helpers
         {
 
             var isWindows = true;
-            var selectedServer = GetFolderName(server);
-            var localAppData = Environment.GetEnvironmentVariable("LocalAppData");
-            var baseCacheDirectory = isWindows ? $"{localAppData}\\CCP\\EVE\\{selectedServer}" : null;
+
+            var baseCacheDirectory = GetFolderPath(server);
 
             Console.WriteLine($"Base cache directory: {baseCacheDirectory}");
 
@@ -94,6 +93,16 @@ namespace EveSettingsSaviour.Helpers
             }
 
             return folders;
+        }
+
+
+        public static string GetFolderPath(Servers server)
+        {
+            var isWindows = true;
+            var selectedServer = GetFolderName(server);
+            var localAppData = Environment.GetEnvironmentVariable("LocalAppData");
+            var baseCacheDirectory = isWindows ? $"{localAppData}\\CCP\\EVE\\{selectedServer}" : null;
+            return baseCacheDirectory;
         }
 
         public static async Task WriteCharacterSettings(CharacterFile source, IEnumerable<CharacterFile> targets)

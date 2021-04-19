@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EveSettingsSaviour.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="390">
-    <Grid>
-        <Label>User settings not implemented yet!</Label>
+             d:DesignHeight="32" d:DesignWidth="390">
+    <Grid Margin="2px" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <CheckBox Name="cb_WillOverwrite" Grid.Row="0" Grid.Column="0" Margin="10, 0, 10, 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
     </Grid>
 </UserControl>

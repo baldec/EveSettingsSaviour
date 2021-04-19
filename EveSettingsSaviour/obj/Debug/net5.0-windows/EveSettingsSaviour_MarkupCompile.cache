@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\roine\source\repos\EveSettingsSaviour\EveSettingsSaviour\App.xaml
-11407045341
+41377127853
 
-10-1001327805
-193-1891726104
-MainWindow.xaml;
+131004691070
+2021211560773
+Controls\CharacterSettingsControl.xaml;Controls\SettingsFolderControl.xaml;Controls\UserSettingsControl.xaml;MainWindow.xaml;
 
 False
 
