@@ -95,6 +95,82 @@ namespace EveSettingsSaviour.Helpers
             return folders;
         }
 
+        public static SettingsFolder ScanFolder(string path, Servers server=Servers.Tranquility)
+        {
+
+            var isWindows = true;
+
+            Regex regex_userfile_win = new Regex(@"^.*\\core_user_(?<id>\d+)\.dat$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Regex regex_charfile_win = new Regex(@"^.*\\core_char_(?<id>\d+).dat$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+            
+
+            if (path == null)
+            {
+                Console.WriteLine("Not windows");
+                Console.ReadLine();
+                return null;
+            }
+
+            
+                //Console.WriteLine(directoryName);
+                var folderName = new DirectoryInfo(path).Name;
+
+            SettingsFolder folder = null;
+                
+                var charFiles = Directory.GetFiles(path, "core_char_*.dat").Where(c => regex_charfile_win.IsMatch(c));
+                foreach (var file in charFiles)
+                {
+                    //Console.WriteLine(file);
+                    var m = isWindows ? regex_charfile_win.Match(file) : null;
+                    if (m.Success)
+                    {
+                        if (folder == null)
+                        {
+                            folder = new SettingsFolder(path);                           
+                        }
+
+                        FileInfo fileInfo = new FileInfo(file);
+                        var id = int.Parse(m?.Groups["id"].Value);
+                        var character = ESI.GetCharacter(id).Result;
+                        //Console.WriteLine($"Id: {character.Id} Name: {character.Name} LastEdit: {fileInfo.LastWriteTime}");
+
+                        folder.CharacterFiles.Add(new CharacterFile
+                        {
+                            Character = character,
+                            Id = id,
+                            FilePath = file,
+                            LastEdited = fileInfo.LastWriteTime
+                        });
+                    }
+                }
+
+                var userFiles = Directory.GetFiles(path, "core_user_*.dat").Where(c => regex_userfile_win.IsMatch(c));
+                foreach (var file in userFiles)
+                {
+                    var m = isWindows ? regex_userfile_win.Match(file) : null;
+                    if (m.Success)
+                    {
+                        if (folder == null)
+                        {
+                            folder = new SettingsFolder(path);
+                        }
+
+                        FileInfo fileInfo = new FileInfo(file);
+                        var id = int.Parse(m?.Groups["id"].Value);
+
+                        folder.UserFiles.Add(new UserFile
+                        {
+                            Id = id,
+                            LastEdited = fileInfo.LastWriteTime,
+                            FilePath = file
+                        });
+                    }
+                }
+            
+            return folder;
+        }
+
 
         public static string GetFolderPath(Servers server)
         {
