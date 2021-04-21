@@ -21,13 +21,14 @@ namespace EveSettingsSaviour.Controls
     /// </summary>
     public partial class CharacterSettingsControl : UserControl
     {
-        CharacterFile CharacterFile { get; }
+        public CharacterFile CharacterFile { get; }
         public CharacterSettingsControl(CharacterFile characterFile)
         {
             InitializeComponent();
             CharacterFile = characterFile;
 
-            cb_WillOverwrite.Content = $"{CharacterFile.Character.Name}({CharacterFile.Id})";
+            cb_WillOverwrite.Content = $"{CharacterFile.Character.Name}({CharacterFile.Id}) - {CharacterFile.LastEdited}";
+            
         }
     }
 }

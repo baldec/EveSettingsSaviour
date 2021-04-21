@@ -31,10 +31,10 @@
             <Button Name="btn_ReadSettings" Grid.Column="1" Grid.Row="0" Content="Scan Settings" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="100" Click="btn_ScanSettings_Click"/>
 
             <Label Grid.Column="0" Grid.Row="1">User file</Label>
-            <ComboBox Name="source_userFile" Grid.Column="1" Grid.Row="1" ></ComboBox>
+            <ComboBox Name="source_userFile" Grid.Column="1" Grid.Row="1" SelectedValuePath="Key" DisplayMemberPath="Value" DropDownClosed="source_userFile_DropDownClosed"></ComboBox>
 
             <Label Grid.Column="0" Grid.Row="2">Character file</Label>
-            <ComboBox Name="source_characterFile" Grid.Column="1" Grid.Row="2" ></ComboBox>
+            <ComboBox Name="source_characterFile" Grid.Column="1" Grid.Row="2" SelectedValuePath="Key" DisplayMemberPath="Value" DropDownClosed="source_characterFile_DropDownClosed"></ComboBox>
 
             <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -53,11 +53,11 @@
                         <RowDefinition Height="32px" />
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <CheckBox Name="cb_configuration_allianceOnly" Grid.Row="0" Margin="5px" VerticalAlignment="Center" Content="Only show characters in same alliance"></CheckBox>
-                    <CheckBox Name="cb_configuration_corporationOnly" Grid.Row="1" Margin="5px" VerticalAlignment="Center" Content="Only show characters in same corporation"></CheckBox>
-                    <CheckBox Name="cb_copy_userAccounts" Grid.Row="2" Margin="5px" VerticalAlignment="Center" Content="Copy user account(s) settings" IsChecked="True"></CheckBox>
-                    <CheckBox Name="cb_copy_characters" Grid.Row="3" Margin="5px" VerticalAlignment="Center" Content="Copy character(s) settings" IsChecked="True"></CheckBox>
-                    
+                    <CheckBox Name="cb_configuration_allianceOnly" Grid.Row="0" Margin="5px" VerticalAlignment="Center" Content="Filter on characters in same alliance" Checked="cb_configuration_allianceOnly_Checked" Unchecked="cb_configuration_allianceOnly_Unchecked"/>
+                    <CheckBox Name="cb_configuration_corporationOnly" Grid.Row="1" Margin="5px" VerticalAlignment="Center" Content="Filter on characters in same corporation" Checked="cb_configuration_corporationOnly_Checked" Unchecked="cb_configuration_corporationOnly_Unchecked"/>
+                    <CheckBox Name="cb_copy_userAccounts" Grid.Row="2" Margin="5px" VerticalAlignment="Center" Content="Copy user account(s) settings" IsChecked="True"/>
+                    <CheckBox Name="cb_copy_characters" Grid.Row="3" Margin="5px" VerticalAlignment="Center" Content="Copy character(s) settings" IsChecked="True"/>
+
                 </Grid>
                 <!--Settings-->
                 <!--Limit to alliancre-->
@@ -96,8 +96,8 @@
             <Button Grid.Row="1" Grid.Column="0" Name="btn_chooseTo" Content="To" Click="btn_chooseTo_Click"/>
             <TextBox Name="txt_toPath" Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="1" MaxLines="1" Margin="4px" IsEnabled="False" TextChanged="txt_pathValidation"></TextBox>
 
-            <Button Grid.Row="2" Grid.Column="0" Name="btn_loadBackup" Grid.ColumnSpan="2" Content="Load From" IsEnabled="False" Click="btn_loadBackup_Click"/>
-            <Button Grid.Row="2" Grid.Column="2" Name="btn_backupSelected" Grid.ColumnSpan="2" Content="Create Backup of folder" IsEnabled="False"/>
+            <Button Grid.Row="2" Grid.Column="0" Name="btn_loadBackup" Grid.ColumnSpan="2" Content="Load From" IsEnabled="False" Click="btn_loadBackup_Click" ToolTip="Load settings in specified folder into the drop-downs above"/>
+            <Button Grid.Row="2" Grid.Column="2" Name="btn_backupSelected" Grid.ColumnSpan="2" Content="Create Backup of folder" IsEnabled="False" Click="btn_backupSelected_Click" ToolTip="Created a backup folder of From into th To folder."/>
         </Grid>
     </Grid>
 </Window>

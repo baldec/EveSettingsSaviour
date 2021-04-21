@@ -22,6 +22,6 @@ namespace EveSettingsSaviour.Models
             CharacterFiles = new List<CharacterFile>();
             UserFiles = new List<UserFile>();
             FolderName = new DirectoryInfo(filepath).Name;
-        }    
+        }
     }
 }

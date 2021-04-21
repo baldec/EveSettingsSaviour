@@ -40,8 +40,8 @@ namespace EveSettingsSaviour.Controls
         {
             foreach (var s in SettingsFolder.CharacterFiles)
             {
-                CharacterSettingsControl userSetting = new CharacterSettingsControl(s);
-                sp_userFiles.Children.Add(userSetting);
+                CharacterSettingsControl characterSetting = new CharacterSettingsControl(s);
+                sp_characterFiles.Children.Add(characterSetting);
             }
         }
 
