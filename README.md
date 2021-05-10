@@ -10,8 +10,18 @@ https://dotnet.microsoft.com/download/dotnet/5.0
 ## Usage
 
 ### Copy user settings
+1. Click *Scan Settings*
+2. Select target on the right side
+3. Click *Copy Settings*
 
 ### Backup user settings
+1. Click *From* and select folder
+2. Click *To* and select destination folder
+3. Click *Create Backup of Folder*
 
 ### Load user settings from backup
-
+1. Click *Scan Settings*
+2. Click *From*
+3. Click *Load From*
+4. Select target on the right side
+5. Click *Copy Settings* 
