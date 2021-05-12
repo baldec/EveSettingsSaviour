@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using EveSettingsSaviour.Models;
 using EveSettingsSaviour.Enumerations;
+using EveSettingsSaviour.Common;
 
 namespace EveSettingsSaviour.Helpers
 {
@@ -21,8 +22,8 @@ namespace EveSettingsSaviour.Helpers
 
             Console.WriteLine($"Base cache directory: {baseCacheDirectory}");
 
-            Regex regex_userfile_win = new Regex(@"^.*\\core_user_(?<id>\d+)\.dat$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            Regex regex_charfile_win = new Regex(@"^.*\\core_char_(?<id>\d+).dat$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Regex regex_userfile_win = new Regex(@$"^.*\\{Constants.USER_PREFIX}(?<id>\d+){Constants.USER_SUFFIX}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Regex regex_charfile_win = new Regex(@$"^.*\\{Constants.CHARACTER_PREFIX}(?<id>\d+){Constants.CHARACTER_SUFFIX}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
             List<SettingsFolder> folders = new List<SettingsFolder>();
 
@@ -38,7 +39,7 @@ namespace EveSettingsSaviour.Helpers
                 //Console.WriteLine(directoryName);
                 var folderName = new DirectoryInfo(directoryName).Name;
 
-                var charFiles = Directory.GetFiles(directoryName, "core_char_*.dat").Where(c => regex_charfile_win.IsMatch(c));
+                var charFiles = Directory.GetFiles(directoryName, $"{Constants.CHARACTER_PREFIX}*{Constants.CHARACTER_SUFFIX}").Where(c => regex_charfile_win.IsMatch(c));
                 foreach (var file in charFiles)
                 {
                     //Console.WriteLine(file);

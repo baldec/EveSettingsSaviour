@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EveSettingsSaviour", "EveSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveSettingsSaviour.Common", "EveSettingsSaviour.Common\EveSettingsSaviour.Common.csproj", "{8065B7CE-7650-496A-9B97-5916FDF23C4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveSettingsSaviour.ESI", "EveSettingsSaviour.ESI\EveSettingsSaviour.ESI.csproj", "{0852059E-5990-4E4E-95D6-7E2D97D3737B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{8065B7CE-7650-496A-9B97-5916FDF23C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8065B7CE-7650-496A-9B97-5916FDF23C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8065B7CE-7650-496A-9B97-5916FDF23C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0852059E-5990-4E4E-95D6-7E2D97D3737B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0852059E-5990-4E4E-95D6-7E2D97D3737B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0852059E-5990-4E4E-95D6-7E2D97D3737B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0852059E-5990-4E4E-95D6-7E2D97D3737B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

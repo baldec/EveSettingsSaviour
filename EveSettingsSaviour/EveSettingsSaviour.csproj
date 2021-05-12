@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EveSettingsSaviour.Common\EveSettingsSaviour.Common.csproj" />
+    <ProjectReference Include="..\EveSettingsSaviour.ESI\EveSettingsSaviour.ESI.csproj" />
   </ItemGroup>
 
 </Project>

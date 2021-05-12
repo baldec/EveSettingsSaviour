@@ -407,7 +407,9 @@ namespace EveSettingsSaviour
 
         private void source_userFile_DropDownClosed(object sender, EventArgs e)
         {
-            var selectedFilePath = ((UserFile)source_userFile.SelectedValue).FilePath;
+            var selectedFilePath = ((UserFile)source_userFile.SelectedValue)?.FilePath;
+
+            if (selectedFilePath == null) return;
 
             foreach (SettingsFolderControl x in sp_targets.Children)
             {
@@ -428,7 +430,9 @@ namespace EveSettingsSaviour
 
         private void source_characterFile_DropDownClosed(object sender, EventArgs e)
         {
-            var selectedFilePath = ((CharacterFile)source_characterFile.SelectedValue).FilePath;
+            var selectedFilePath = ((CharacterFile)source_characterFile.SelectedValue)?.FilePath;
+
+            if (selectedFilePath == null) return;
 
             foreach (SettingsFolderControl x in sp_targets.Children)
             {
