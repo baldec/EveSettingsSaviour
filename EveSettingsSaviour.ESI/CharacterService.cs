@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using EveSettingsSaviour.ESI.Models;
+using System;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using EveSettingsSaviour.ESI.Models;
 
 namespace EveSettingsSaviour.ESI
 {
-    public static class Service
+    public static class CharacterService
     {
         static readonly HttpClient client = new HttpClient();
         public static async Task<Character> GetCharacter(int id, string server = "tranquility")

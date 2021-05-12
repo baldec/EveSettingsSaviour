@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EveSettingsSaviour.Common
+﻿namespace EveSettingsSaviour.Common
 {
     public class Constants
     {

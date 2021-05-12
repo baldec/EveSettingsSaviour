@@ -1,13 +1,12 @@
-﻿using System;
+﻿using EveSettingsSaviour.Common;
+using EveSettingsSaviour.Enumerations;
+using EveSettingsSaviour.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using EveSettingsSaviour.Models;
-using EveSettingsSaviour.Enumerations;
-using EveSettingsSaviour.Common;
 
 namespace EveSettingsSaviour.Helpers
 {
@@ -55,7 +54,7 @@ namespace EveSettingsSaviour.Helpers
 
                         FileInfo fileInfo = new FileInfo(file);
                         var id = int.Parse(m?.Groups["id"].Value);
-                        var character = ESI.GetCharacter(id).Result;
+                        var character = ESI.CharacterService.GetCharacter(id).Result;
                         //Console.WriteLine($"Id: {character.Id} Name: {character.Name} LastEdit: {fileInfo.LastWriteTime}");
 
                         folder.CharacterFiles.Add(new CharacterFile
@@ -84,8 +83,9 @@ namespace EveSettingsSaviour.Helpers
                         FileInfo fileInfo = new FileInfo(file);
                         var id = int.Parse(m?.Groups["id"].Value);
 
-                        folder.UserFiles.Add(new UserFile { 
-                            Id = id, 
+                        folder.UserFiles.Add(new UserFile
+                        {
+                            Id = id,
                             LastEdited = fileInfo.LastWriteTime,
                             FilePath = file
                         });
@@ -96,7 +96,7 @@ namespace EveSettingsSaviour.Helpers
             return folders;
         }
 
-        public static SettingsFolder ScanFolder(string path, Servers server=Servers.Tranquility)
+        public static SettingsFolder ScanFolder(string path, Servers server = Servers.Tranquility)
         {
 
             var isWindows = true;
@@ -104,7 +104,7 @@ namespace EveSettingsSaviour.Helpers
             Regex regex_userfile_win = new Regex(@"^.*\\core_user_(?<id>\d+)\.dat$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             Regex regex_charfile_win = new Regex(@"^.*\\core_char_(?<id>\d+).dat$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-            
+
 
             if (path == null)
             {
@@ -113,62 +113,62 @@ namespace EveSettingsSaviour.Helpers
                 return null;
             }
 
-            
-                //Console.WriteLine(directoryName);
-                var folderName = new DirectoryInfo(path).Name;
+
+            //Console.WriteLine(directoryName);
+            var folderName = new DirectoryInfo(path).Name;
 
             SettingsFolder folder = null;
-                
-                var charFiles = Directory.GetFiles(path, "core_char_*.dat").Where(c => regex_charfile_win.IsMatch(c));
-                foreach (var file in charFiles)
+
+            var charFiles = Directory.GetFiles(path, "core_char_*.dat").Where(c => regex_charfile_win.IsMatch(c));
+            foreach (var file in charFiles)
+            {
+                //Console.WriteLine(file);
+                var m = isWindows ? regex_charfile_win.Match(file) : null;
+                if (m.Success)
                 {
-                    //Console.WriteLine(file);
-                    var m = isWindows ? regex_charfile_win.Match(file) : null;
-                    if (m.Success)
+                    if (folder == null)
                     {
-                        if (folder == null)
-                        {
-                            folder = new SettingsFolder(path);                           
-                        }
-
-                        FileInfo fileInfo = new FileInfo(file);
-                        var id = int.Parse(m?.Groups["id"].Value);
-                        var character = ESI.GetCharacter(id).Result;
-                        //Console.WriteLine($"Id: {character.Id} Name: {character.Name} LastEdit: {fileInfo.LastWriteTime}");
-
-                        folder.CharacterFiles.Add(new CharacterFile
-                        {
-                            Character = character,
-                            Id = id,
-                            FilePath = file,
-                            LastEdited = fileInfo.LastWriteTime
-                        });
+                        folder = new SettingsFolder(path);
                     }
-                }
 
-                var userFiles = Directory.GetFiles(path, "core_user_*.dat").Where(c => regex_userfile_win.IsMatch(c));
-                foreach (var file in userFiles)
+                    FileInfo fileInfo = new FileInfo(file);
+                    var id = int.Parse(m?.Groups["id"].Value);
+                    var character = ESI.CharacterService.GetCharacter(id).Result;
+                    //Console.WriteLine($"Id: {character.Id} Name: {character.Name} LastEdit: {fileInfo.LastWriteTime}");
+
+                    folder.CharacterFiles.Add(new CharacterFile
+                    {
+                        Character = character,
+                        Id = id,
+                        FilePath = file,
+                        LastEdited = fileInfo.LastWriteTime
+                    });
+                }
+            }
+
+            var userFiles = Directory.GetFiles(path, "core_user_*.dat").Where(c => regex_userfile_win.IsMatch(c));
+            foreach (var file in userFiles)
+            {
+                var m = isWindows ? regex_userfile_win.Match(file) : null;
+                if (m.Success)
                 {
-                    var m = isWindows ? regex_userfile_win.Match(file) : null;
-                    if (m.Success)
+                    if (folder == null)
                     {
-                        if (folder == null)
-                        {
-                            folder = new SettingsFolder(path);
-                        }
-
-                        FileInfo fileInfo = new FileInfo(file);
-                        var id = int.Parse(m?.Groups["id"].Value);
-
-                        folder.UserFiles.Add(new UserFile
-                        {
-                            Id = id,
-                            LastEdited = fileInfo.LastWriteTime,
-                            FilePath = file
-                        });
+                        folder = new SettingsFolder(path);
                     }
+
+                    FileInfo fileInfo = new FileInfo(file);
+                    var id = int.Parse(m?.Groups["id"].Value);
+
+                    folder.UserFiles.Add(new UserFile
+                    {
+                        Id = id,
+                        LastEdited = fileInfo.LastWriteTime,
+                        FilePath = file
+                    });
                 }
-            
+            }
+
             return folder;
         }
 
@@ -201,7 +201,7 @@ namespace EveSettingsSaviour.Helpers
             List<Task> tasks = new();
             foreach (var target in targets)
             {
-                tasks.Add(File.WriteAllBytesAsync(target.FilePath, content));                
+                tasks.Add(File.WriteAllBytesAsync(target.FilePath, content));
             }
 
             await Task.WhenAll(tasks.ToArray());

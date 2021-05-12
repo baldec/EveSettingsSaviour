@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace EveSettingsSaviour.ESI.Models
 {
@@ -17,28 +13,28 @@ namespace EveSettingsSaviour.ESI.Models
         [JsonPropertyName("ancestry_id")]
         public int? AncestryId { get; set; }
 
-        [JsonPropertyName("birthday")] 
+        [JsonPropertyName("birthday")]
         public DateTime? Birthday { get; set; }
 
-        [JsonPropertyName("bloodline_id")] 
+        [JsonPropertyName("bloodline_id")]
         public int? BloodlineId { get; set; }
 
-        [JsonPropertyName("corporation_id")] 
+        [JsonPropertyName("corporation_id")]
         public int? CorporationId { get; set; }
 
-        [JsonPropertyName("description")] 
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonPropertyName("gender")] 
+        [JsonPropertyName("gender")]
         public string Gender { get; set; }
 
-        [JsonPropertyName("name")] 
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("race_id")] 
+        [JsonPropertyName("race_id")]
         public int? RaceId { get; set; }
 
-        [JsonPropertyName("security_status")] 
+        [JsonPropertyName("security_status")]
         public decimal SecurityStatus { get; set; }
 
 
