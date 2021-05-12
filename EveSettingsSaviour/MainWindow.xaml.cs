@@ -82,50 +82,58 @@ namespace EveSettingsSaviour
             //await Task.Run(() =>
             //{
 
-                var targetUserFiles = new List<UserFile>();
-                var targetCharacterFiles = new List<CharacterFile>();
+            var targetUserFiles = new List<UserFile>();
+            var targetCharacterFiles = new List<CharacterFile>();
 
-                foreach (SettingsFolderControl x in sp_targets.Children)
+            foreach (SettingsFolderControl x in sp_targets.Children)
+            {
+                foreach (CharacterSettingsControl cControl in x.sp_characterFiles.Children)
                 {
-                    foreach (CharacterSettingsControl cControl in x.sp_characterFiles.Children)
+                    if (cControl.cb_WillOverwrite.IsChecked == true)
                     {
-                        if (cControl.cb_WillOverwrite.IsChecked == true)
-                        {
-                            targetCharacterFiles.Add(cControl.CharacterFile);
-                        }
-
+                        targetCharacterFiles.Add(cControl.CharacterFile);
                     }
-                    foreach (UserSettingsControl cControl in x.sp_userFiles.Children)
-                    {
-                        if (cControl.cb_WillOverwrite.IsChecked == true)
-                        {
-                            targetUserFiles.Add(cControl.UserFile);
-                        }
 
-                    }
                 }
-
-                if (cb_copy_userAccounts.IsChecked == true)
+                foreach (UserSettingsControl cControl in x.sp_userFiles.Children)
                 {
-                    var selectedUserAccount = (UserFile)source_userFile.SelectedValue;
-                    var fromPath = new FileInfo(selectedUserAccount.FilePath);
-
-                    foreach (var target in targetUserFiles)
+                    if (cControl.cb_WillOverwrite.IsChecked == true)
                     {
-                        fromPath.CopyTo(target.FilePath, true);
+                        targetUserFiles.Add(cControl.UserFile);
                     }
-                }
 
-                if (cb_copy_characters.IsChecked == true)
+                }
+            }
+
+            if (cb_copy_userAccounts.IsChecked == true)
+            {
+                var selectedUserAccount = (UserFile)source_userFile.SelectedValue;
+
+                // TODO: Logging and visual feeback
+                if (selectedUserAccount == null) return;
+
+                var fromPath = new FileInfo(selectedUserAccount.FilePath);
+
+                foreach (var target in targetUserFiles)
                 {
-                    var selectedCharacter = (CharacterFile)source_characterFile.SelectedValue;
-                    var fromPath = new FileInfo(selectedCharacter.FilePath);
-
-                    foreach (var target in targetCharacterFiles)
-                    {
-                        fromPath.CopyTo(target.FilePath, true);
-                    }
+                    fromPath.CopyTo(target.FilePath, true);
                 }
+            }
+
+            if (cb_copy_characters.IsChecked == true)
+            {
+                var selectedCharacter = (CharacterFile)source_characterFile.SelectedValue;
+
+                // TODO: Logging and visual feeback
+                if (selectedCharacter == null) return;
+
+                var fromPath = new FileInfo(selectedCharacter.FilePath);
+
+                foreach (var target in targetCharacterFiles)
+                {
+                    fromPath.CopyTo(target.FilePath, true);
+                }
+            }
             //});
             btn_CopySettings.IsEnabled = true;
         }
