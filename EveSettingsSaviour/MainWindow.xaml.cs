@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EveSettingsSaviour.Common;
 using EveSettingsSaviour.Controls;
 using EveSettingsSaviour.Helpers;
 using EveSettingsSaviour.Models;
@@ -113,10 +114,13 @@ namespace EveSettingsSaviour
                 if (selectedUserAccount == null) return;
 
                 var fromPath = new FileInfo(selectedUserAccount.FilePath);
+                var from_coreYamlPath = new FileInfo($"{fromPath.DirectoryName}/{Constants.CORE_PUBLIC}");
 
                 foreach (var target in targetUserFiles)
                 {
-                    fromPath.CopyTo(target.FilePath, true);
+                    var result = fromPath.CopyTo(target.FilePath, true);
+                    var target_coreYamlPath = $"{result.DirectoryName}/{Constants.CORE_PUBLIC}";
+                    from_coreYamlPath.CopyTo(target_coreYamlPath, true);
                 }
             }
 

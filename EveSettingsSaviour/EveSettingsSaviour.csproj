@@ -11,4 +11,8 @@
     <PackageProjectUrl>https://github.com/baldec/EveSettingsSaviour</PackageProjectUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EveSettingsSaviour.Common\EveSettingsSaviour.Common.csproj" />
+  </ItemGroup>
+
 </Project>
