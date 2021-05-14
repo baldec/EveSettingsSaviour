@@ -18,24 +18,35 @@ namespace EveSettingsSaviour
     public partial class MainWindow : Window
     {
         List<SettingsFolder> _settingsFolders;
+        Enumerations.Servers _server;
 
         public MainWindow()
         {
             InitializeComponent();
 
             _settingsFolders = new List<SettingsFolder>();
+            _server = Enumerations.Servers.Tranquility;
         }
 
-
-        private async void btn_ScanSettings_Click(object sender, RoutedEventArgs e)
+        private async void ScanSettingsFolder(Enumerations.Servers server)
         {
-            btn_ReadSettings.IsEnabled = false;
+            _settingsFolders = await Task.Run(() => SettingsManager.ScanSettings(server).ToList());
 
-            _settingsFolders = await Task.Run(() => SettingsManager.ScanSettings(Enumerations.Servers.Tranquility).ToList());
+            sp_targets.Dispatcher.Invoke(() =>
+            {
+                sp_targets.Children.Clear();
+            });
 
-            sp_targets.Children.Clear();
-            source_userFile.Items.Clear();
-            source_characterFile.Items.Clear();
+            source_userFile.Dispatcher.Invoke(() =>
+            {
+                source_userFile.Items.Clear();
+            });
+
+            source_characterFile.Dispatcher.Invoke(() =>
+            {
+                source_characterFile.Items.Clear();
+            });
+            
 
             foreach (SettingsFolder s in _settingsFolders)
             {
@@ -46,7 +57,12 @@ namespace EveSettingsSaviour
                     var displayValue = $"{s.FolderName} - {u.Id}";
 
                     var item = new KeyValuePair<UserFile, string>(u, displayValue);
-                    source_userFile.Items.Add(item);
+
+                    source_userFile.Dispatcher.Invoke(() => 
+                    {
+                        source_userFile.Items.Add(item);
+                    });
+                    
                 }
 
                 foreach (CharacterFile c in s.CharacterFiles)
@@ -56,13 +72,29 @@ namespace EveSettingsSaviour
 
                     var item = new KeyValuePair<CharacterFile, string>(c, displayValue);
 
-                    source_characterFile.Items.Add(item);
+                    source_characterFile.Dispatcher.Invoke(() =>
+                    {
+                        source_characterFile.Items.Add(item);
+                    });
                 }
 
-                SettingsFolderControl sfc = new SettingsFolderControl(s);
+                Dispatcher.Invoke(() =>
+                {
+                    SettingsFolderControl sfc = new SettingsFolderControl(s);
 
-                sp_targets.Children.Add(sfc);
+                    sp_targets.Dispatcher.Invoke(() => { sp_targets.Children.Add(sfc); });
+                });
+
+                
             }
+        }
+
+        private async void btn_ScanSettings_Click(object sender, RoutedEventArgs e)
+        {
+            btn_ReadSettings.IsEnabled = false;
+
+            await Task.Run(() => ScanSettingsFolder(_server));
+
             btn_ReadSettings.IsEnabled = true;
         }
 
@@ -131,6 +163,10 @@ namespace EveSettingsSaviour
                 }
             }
             //});
+
+            // Reload settings so that the timestamp is accurate
+            await Task.Run(() => ScanSettingsFolder(_server));
+
             btn_CopySettings.IsEnabled = true;
         }
 

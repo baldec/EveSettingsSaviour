@@ -28,7 +28,7 @@ namespace EveSettingsSaviour.Controls
             foreach (var s in SettingsFolder.CharacterFiles)
             {
                 CharacterSettingsControl characterSetting = new CharacterSettingsControl(s);
-                sp_characterFiles.Children.Add(characterSetting);
+                sp_characterFiles.Dispatcher.Invoke(() => { sp_characterFiles.Children.Add(characterSetting); });
             }
         }
 
@@ -37,7 +37,7 @@ namespace EveSettingsSaviour.Controls
             foreach (var s in SettingsFolder.UserFiles)
             {
                 UserSettingsControl userSetting = new UserSettingsControl(s);
-                sp_userFiles.Children.Add(userSetting);
+                sp_userFiles.Dispatcher.Invoke(() => { sp_userFiles.Children.Add(userSetting); });
             }
         }
     }
